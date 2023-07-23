@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import { sequelize } from "../config/db.config";
+import { sequelize } from "../config/db.config.js";
 
 const Bootcamp = sequelize.define('Bootcamp', {
     title: {
@@ -12,7 +12,7 @@ const Bootcamp = sequelize.define('Bootcamp', {
         validate: {
             isInt: true, 
             min: 5, 
-            max: 10,
+            max: 20, // con 10 no funciona
         },
     },
     description: {
@@ -20,7 +20,9 @@ const Bootcamp = sequelize.define('Bootcamp', {
         allowNull: false, 
     }
 }, {
-    tableName: 'bootcamps'
+    tableName: 'bootcamps',    
+    createdAt: true,
+    updatedAt: true
 });
 
 export {
