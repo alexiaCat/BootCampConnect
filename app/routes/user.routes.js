@@ -12,8 +12,8 @@ const userRouter = Router();
 userRouter.post('/', createUser);
 userRouter.get('/:id', findUserById);
 userRouter.get('/', findAll);
-userRouter.post('/:id', updateUserById);
-userRouter.get('/:id', deleteUserById);
+userRouter.put('/:id', updateUserById);
+userRouter.delete('/:id', deleteUserById);
 
 export {
     userRouter

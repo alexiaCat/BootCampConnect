@@ -1,29 +1,37 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/db.config.js";
 
+
 const Bootcamp = sequelize.define('Bootcamp', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    },
     title: {
         type: DataTypes.STRING(200),
-        allowNull: false, 
+        allowNull: false,
     },
     cue: {
         type: DataTypes.INTEGER,
-        allowNull: false, 
+        allowNull: false,
         validate: {
-            isInt: true, 
-            min: 5, 
+            isInt: true,
+            min: 5,
             max: 20, // con 10 no funciona
         },
     },
     description: {
-        type: DataTypes.STRING(500), 
-        allowNull: false, 
+        type: DataTypes.STRING(500),
+        allowNull: false,
     }
 }, {
-    tableName: 'bootcamps',    
-    createdAt: true,
-    updatedAt: true
+    tableName: 'bootcamps',
+    timestamps: true,
 });
+
+
+
 
 export {
     Bootcamp
