@@ -49,14 +49,10 @@ const addUser = async (req, res) => {
     const user = await User.findByPk(user_id);
 
     await bootcamp.addUser(user);
-    const message = `***************************\nAgregado el usuario id=${user_id} al bootcamp con id=${id}\n***************************`;
 
-    console.log(message);
-    return res.json({
-      message: `Se ha agregado el usuario ${user_id} al Bootcamp ${id}`
-    });
+    return { success: true, message: `Agregado el usuario id=${user_id} al bootcamp con id=${id}` };
   } catch (error) {
-    res.status(500).json({ error: "Error al agregar el usuario al Bootcamp" });
+    return { success: false, message: "Error al agregar el usuario al Bootcamp" };
   }
 };
 
@@ -64,26 +60,40 @@ const addUser = async (req, res) => {
 const findById = async (req, res) => {
   try {
     const { id } = req.params;
-    const bootcamp = await Bootcamp.findByPk(id);
+    const bootcamp = await Bootcamp.findOne({
+      where: { id: id },
+      include: [User],
+    });
     if (!bootcamp) {
       return res.status(404).json({ message: "Bootcamp no encontrado" });
     }
-    res.json(bootcamp);
+    const bootcampsJSON = JSON.stringify(bootcamp);
+    console.log("Consultando el Bootcamp id = 2, incluyendo los usuarios.\n" + bootcampsJSON + "\n\n");
+    return res.json(bootcamp);
   } catch (error) {
     res.status(500).json({ error: "Error al obtener el Bootcamp" });
   }
 };
 
 
-// Obtener todos los Usuarios incluyendo los Bootcamp llamado findAll.
-const findAll = async (req, res) => {
+// Obtener todos los bootcamp incluyendo los usuarios llamado findAll.
+const findBootcampAll = async (req, res) => {
   try {
     const bootcamps = await Bootcamp.findAll({
       include: [User],
     });
-    res.json(bootcamps);
+
+    const bootcampsJSON = JSON.stringify(bootcamps);
+    console.log("Listar todos los Bootcamp con sus usuarios\n" + bootcampsJSON + "\n\n");
+    res.status(200).json(bootcamps);
   } catch (error) {
-    res.status(500).json({ error: "Error al obtener los Bootcamps" });
+    console.log(error.name, error.message);
+    res.status(500).json({
+      message: error.message,
+      code: 500,
+      name: error.name,
+      mensajePersonalizado: 'Error al obtener los bootcamps'
+    });
   }
 };
 
@@ -91,5 +101,5 @@ export {
   createBootcamp,
   addUser,
   findById,
-  findAll,
+  findBootcampAll,
 };

@@ -38,7 +38,6 @@ export default class Index {
 
     listen() {
         this.app.listen(this.port, () => {
-            console.log(`Escuchando en el puerto: ${this.port}`)
         })
     }
 }

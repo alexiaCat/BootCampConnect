@@ -9,7 +9,7 @@ const Bootcamp = sequelize.define('Bootcamp', {
         autoIncrement: true,
     },
     title: {
-        type: DataTypes.STRING(200),
+        type: DataTypes.STRING(255),
         allowNull: false,
     },
     cue: {

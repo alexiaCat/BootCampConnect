@@ -3,7 +3,7 @@ import {
     createBootcamp,
     addUser,
     findById,
-    findAll,
+    findBootcampAll,
 } from '../controllers/bootcamp.controller.js';
 
 const bootcampRouter = Router();
@@ -11,7 +11,7 @@ const bootcampRouter = Router();
 bootcampRouter.post('/', createBootcamp);
 bootcampRouter.post('/:id/users', addUser);
 bootcampRouter.get('/:id', findById);
-bootcampRouter.get('/', findAll);
+bootcampRouter.get('/', findBootcampAll);
 
 export {
     bootcampRouter

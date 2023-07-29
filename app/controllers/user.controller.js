@@ -7,24 +7,22 @@ import { Bootcamp } from "../models/bootcamp.model.js";
 // Crear y guardar usuarios llamado createUser.
 const createUser = async (req = request, res = response) => {
   try {
-    const { firstname, lastname, email } = req.body;
+    const { firstName, lastName, email } = req.body;
 
     const user = await User.create({
-      firstname,
-      lastname,
+      firstName,
+      lastName,
       email,
     });
 
-
     const message = `Se ha creado el usuario: {
       "id": ${user.id},
-      "firstName": "${user.firstname}",
-      "lastName": "${user.lastname}",
+      "firstName": "${user.firstName}",
+      "lastName": "${user.lastName}",
       "email": "${user.email}",
       "updatedAt": "${user.updatedAt}",
       "createdAt": "${user.createdAt}"
     }`;
-
 
     console.log(`>> ${message}`);
 
@@ -58,7 +56,9 @@ const findUserById = async (req, res) => {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
 
-    return res.status(200).json(user.Bootcamps);
+    const userJSON = JSON.stringify(user);
+    console.log("Consultando el Usuario id = 2, incluyendo los bootcamps.\n" + userJSON + "\n\n");
+    return res.json(user);
   } catch (error) {
     console.log(error.name, error.message);
     res.status(500).json({
@@ -72,12 +72,18 @@ const findUserById = async (req, res) => {
 
 
 
+
+
+
 // Obtener todos los Usuarios incluyendo, los Bootcamp llamado findAll.
-const findAll = async (req = request, res = response) => {
+const findAll = async (req, res) => {
   try {
     const arregloUsers = await User.findAll({
       include: [Bootcamp],
     });
+
+    const usersJson = JSON.stringify(arregloUsers);
+    console.log("Listar los usuarios con sus Bootcamp\n" + usersJson + "\n\n");
     res.status(200).json(arregloUsers);
   } catch (error) {
     console.log(error.name, error.message);
@@ -85,27 +91,33 @@ const findAll = async (req = request, res = response) => {
       message: error.message,
       code: 500,
       name: error.name,
-      mensajePersonalizado: 'Error en el servidor, findAll User'
+      mensajePersonalizado: 'Error al obtener los usuarios'
     });
   }
 }
 
 
 // Actualizar usuario por Id llamado updateUserById.
-const updateUserById = async (req = request, res = response) => {
+const updateUserById = async (req, res) => {
   try {
     const { id } = req.params;
-    const { firstname, lastname, email } = req.body;
+    const { firstName, lastName, email } = req.body;
     const user = await User.findByPk(id);
     if (!user) {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
-    await user.update({ firstname, lastname, email });
-    res.json(user);
+    await user.update({ firstName, lastName, email });
+
+    console.log("Usuario actualizado:", user.toJSON());
+    return res.json({
+      message: "Usuario actualizado correctamente",
+      user,
+    });
   } catch (error) {
     res.status(500).json({ error: "Error al actualizar el usuario" });
   }
 };
+
 
 
 //Eliminar un usuario por Id llamado deleteUserById.
@@ -117,6 +129,7 @@ const deleteUserById = async (req = request, res = response) => {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
     await user.destroy();
+    console.log("\nUsuario eliminado:", user.toJSON());
     res.json({ message: "Usuario eliminado correctamente" });
   } catch (error) {
     res.status(500).json({ error: "Error al eliminar el usuario" });
