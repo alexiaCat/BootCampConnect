@@ -19,13 +19,9 @@ Antes de comenzar, asegúrate de tener instalados los siguientes componentes:
 `npm install`
 
 
-1.Configura la base de datos PostgreSQL:
-Crea una base de datos llamada db_bootcamp en PostgreSQL.
-
-
-2.Configura la conexión a la base de datos:
-Dentro de la carpeta config, en el archivo db.config.js.
-Agrega un .env en la raíz del proyecto con tu configuración de entorno.
+1. Configura la conexión a la base de datos:
+Dentro de la carpeta config, en el archivo db.config.js esta el modelo de datos.
+Agrega un .env en la raíz del proyecto reemplazando cada valor con tu configuración de entorno.
 
 ### Instrucciones para ejecutar el servidor
 Para iniciar el servidor, ejecuta el siguiente comando en la raíz del proyecto:
