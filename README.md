@@ -19,7 +19,7 @@ Antes de comenzar, asegúrate de tener instalados los siguientes componentes:
 `npm install`
 
 
-1. Configura la conexión a la base de datos:
+3. Configura la conexión a la base de datos:
 Dentro de la carpeta config, en el archivo db.config.js esta el modelo de datos.
 Agrega un .env en la raíz del proyecto reemplazando cada valor con tu configuración de entorno.
 
