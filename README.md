@@ -34,7 +34,7 @@ Para iniciar el servidor, ejecuta el siguiente comando en la raíz del proyecto:
 
 
 ### Dependencias utilizadas
-*Express: Framework para el manejo de rutas y middleware.
-*Sequelize: ORM (Object-Relational Mapping) para interactuar con la base de datos PostgreSQL.
-*pg: Cliente de PostgreSQL para Node.js.
-*nodemon: Herramienta para reiniciar automáticamente el servidor durante el desarrollo.
+- Express: Framework para el manejo de rutas y middleware.
+- Sequelize: ORM (Object-Relational Mapping) para interactuar con la base de datos PostgreSQL.
+- pg: Cliente de PostgreSQL para Node.js.
+- nodemon: Herramienta para reiniciar automáticamente el servidor durante el desarrollo.
