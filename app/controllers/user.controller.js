@@ -49,7 +49,13 @@ const findUserById = async (req, res) => {
 
     const user = await User.findOne({
       where: { id: id },
-      include: [Bootcamp],
+      include: [
+        {
+          model: Bootcamp,
+          attributes: ['id', 'title'],
+          through: { attributes: [] },
+        },
+      ],
     });
 
     if (!user) {
@@ -79,7 +85,13 @@ const findUserById = async (req, res) => {
 const findAll = async (req, res) => {
   try {
     const arregloUsers = await User.findAll({
-      include: [Bootcamp],
+      include: [
+        {
+          model: Bootcamp,
+          attributes: ['id', 'title'],
+          through: { attributes: [] },
+        },
+      ],
     });
 
     const usersJson = JSON.stringify(arregloUsers);

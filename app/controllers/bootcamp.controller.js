@@ -62,7 +62,13 @@ const findById = async (req, res) => {
     const { id } = req.params;
     const bootcamp = await Bootcamp.findOne({
       where: { id: id },
-      include: [User],
+      include: [{
+        model: User,
+        attributes: ["id", "firstName", "lastName"],
+        through: {
+          attributes: [],
+        }
+      }],
     });
     if (!bootcamp) {
       return res.status(404).json({ message: "Bootcamp no encontrado" });
@@ -80,7 +86,13 @@ const findById = async (req, res) => {
 const findBootcampAll = async (req, res) => {
   try {
     const bootcamps = await Bootcamp.findAll({
-      include: [User],
+      include: [{
+        model: User,
+        attributes: ["id", "firstName", "lastName"],
+        through: {
+          attributes: [],
+        }
+      }],
     });
 
     const bootcampsJSON = JSON.stringify(bootcamps);

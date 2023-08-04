@@ -13,15 +13,13 @@ Antes de comenzar, asegúrate de tener instalados los siguientes componentes:
 
 1. Clona este repositorio en tu máquina local.
 
-2. Instala las dependencias del proyecto ejecutando el siguiente comando en la raíz del proyecto:
+2. Instala las dependencias del proyecto ejecutando el siguiente comando en la raíz del proyecto: `npm install`
 
+3. Crea la base de datos en PostgreSQL llamada `db_bootcamp`
 
-`npm install`
-
-
-3. Configura la conexión a la base de datos:
-Dentro de la carpeta config, en el archivo db.config.js esta el modelo de datos.
-Agrega un .env en la raíz del proyecto reemplazando cada valor con tu configuración de entorno.
+4. Configura la conexión a la base de datos:
+* Dentro de la carpeta config, en el archivo db.config.js esta el modelo de datos.
+* Agrega un .env en la raíz del proyecto reemplazando cada valor con tu configuración de entorno.
 
 ### Instrucciones para ejecutar el servidor
 Para iniciar el servidor, ejecuta el siguiente comando en la raíz del proyecto:
